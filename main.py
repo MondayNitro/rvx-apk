@@ -16,7 +16,7 @@ def main():
     formatted_version = desired_version.replace(".", "-")
 
     # Download the specific version
-    url = f"https://www.apkmirror.com/apk/google-inc/youtube-{formatted_version}-release/"
+    url = f"https://www.apkmirror.com/apk/google-inc/youtube/youtube-{formatted_version}-release/"
     
     repo_url: str = "MondayNitro/rvx-apk"
 
