@@ -86,7 +86,7 @@ Changelogs:
     build_apks(latest_version)
 
     publish_release(
-        latest_version.version,
+        f"{latest_version.version}_{rvxRelease['tag_name']}",
         [
             f"yt-rvx-v{latest_version.version}.apk",
             f"microg-rvx-v{latest_version.version}.apk",
