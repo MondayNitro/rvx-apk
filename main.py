@@ -94,6 +94,13 @@ Changelogs:
         message,
     )
 
+# Rename big_file.apkm using the desired_version
+    new_filename = f"youtube-bundle-v{desired_version}.apkm"
+    os.rename("big_file.apkm", new_filename)
+
+    # Add the renamed file to the assets list
+    assets.append(new_filename)
+
 
 if __name__ == "__main__":
     main()
