@@ -6,6 +6,9 @@ from utils import panic, merge_apk, publish_release
 from download_bins import download_release_asset
 import apkmirror
 import os
+import shutil
+import zipfile
+import requests
 
 
 def main():
@@ -30,6 +33,19 @@ def main():
         panic("Failed to fetch the latest build version")
         return
 
+    # Fetch Revanced patches version information
+    rvx_patches_url = "https://api.github.com/repos/inotia00/revanced-patches/releases/latest"
+    response = requests.get(rvx_patches_url)
+    rvx_patches_data = response.json()
+    rvx_patches_version = rvx_patches_data["tag_name"]
+
+    # Begin stuff
+    if last_build_version.tag_name != f"{latest_version.version}_{rvx_patches_version}":
+        print(f"New version found: {latest_version.version}")
+    else:
+        print("No new version found")
+        return
+
     # get bundle and universal variant
     variants: list[Variant] = apkmirror.get_variants(latest_version)
 
@@ -46,12 +62,37 @@ def main():
     if not os.path.exists("big_file.apkm"):
         panic("Failed to download apk")
 
+    with zipfile.ZipFile("big_file.apkm", "r") as zip_ref:
+        zip_ref.extractall("extracted_bundle")
+
+    files_to_keep = ["base.apk", "split_config.armeabi_v7a.apk", "split_config.en.apk", "split_config.hdpi.apk", "split_config.xhdpi.apk", "split_config.xxhdpi.apk"]
+
+    def keep_files_recursively(directory, files_to_keep):
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                if file not in files_to_keep:
+                    os.remove(os.path.join(root, file))
+            for dir in dirs:
+                if dir not in files_to_keep:
+                    shutil.rmtree(os.path.join(root, dir))
+
+    keep_files_recursively("extracted_bundle", files_to_keep)
+
+    # Create a new ZIP archive with the remaining files
+    with zipfile.ZipFile("big_file.apks", "w") as zip_ref:
+        for root, dirs, files in os.walk("extracted_bundle"):
+            for file in files:
+                zip_ref.write(os.path.join(root, file), os.path.join(os.path.relpath(root, "extracted_bundle"), file))
+
+    # Delete the extracted_bundle directory
+    shutil.rmtree("extracted_bundle")
+    
     download_apkeditor()
 
     if not os.path.exists("big_file_merged.apk"):
-        merge_apk("big_file.apkm")
+        merge_apk("big_file.apks")
     else:
-        print("apkm is already merged")
+        print("apk bundle is already merged")
 
     download_revanced_bins()
 
@@ -78,15 +119,15 @@ Changelogs:
 
     build_apks(latest_version)
 
-    # Rename big_file.apkm using the desired_version
-    os.rename("big_file.apkm", f"youtube-bundle-v{desired_version}.apkm")
+    # Rename big_file.apks using the desired_version
+    os.rename("big_file.apks", f"youtube-bundle-v{desired_version}.apks")
 
     publish_release(
         f"{latest_version.version}_{rvxRelease['tag_name']}",
         [
             f"yt-rvx-v{latest_version.version}.apk",
             f"microg-rvx-v{latest_version.version}.apk",
-            f"youtube-bundle-v{desired_version}.apkm",
+            f"youtube-bundle-v{desired_version}.apks",
         ],
         message,
     )
