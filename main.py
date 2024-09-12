@@ -30,13 +30,6 @@ def main():
         panic("Failed to fetch the latest build version")
         return
 
-    # Begin stuff
-    if last_build_version.tag_name != latest_version.version:
-        print(f"New version found: {latest_version.version}")
-    else:
-        print("No new version found")
-        return
-
     # get bundle and universal variant
     variants: list[Variant] = apkmirror.get_variants(latest_version)
 
