@@ -92,14 +92,19 @@ Changelogs:
 
     # Keep only the desired files
     files_to_keep = ["base.apk", "split_config.armeabi_v7a.apk", "split_config.en.apk", "split_config.xhdpi.apk", "split_config.xxhdpi.apk"]
-    for file in os.listdir("extracted_bundle"):
-        if file not in files_to_keep:
-            os.remove(os.path.join("extracted_bundle", file))
+    def keep_files_recursively(directory, files_to_keep):
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                if file not in files_to_keep:
+                    os.remove(os.path.join(root, file))
+
+    keep_files_recursively("extracted_bundle", files_to_keep)
 
     # Create a new ZIP archive with the selected files
     with zipfile.ZipFile(f"youtube-bundle-v{desired_version}.apks", "w") as zip_ref:
-        for file in files_to_keep:
-            zip_ref.write(os.path.join("extracted_bundle", file), file)
+        for root, dirs, files in os.walk("extracted_bundle"):
+            for file in files:
+                zip_ref.write(os.path.join(root, file), os.path.join(os.path.relpath(root, "extracted_bundle"), file))
 
     # Remove the extracted bundle directory
     os.rmdir("extracted_bundle")
