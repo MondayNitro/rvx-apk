@@ -79,20 +79,20 @@ def main():
     keep_files_recursively("extracted_bundle", files_to_keep)
 
     # Create a new ZIP archive with the remaining files
-    with zipfile.ZipFile("big_file.apks", "w") as zip_ref:
+    with zipfile.ZipFile("big_file.apks", "w", compression=zipfile.ZIP_DEFLATED, compresslevel=5) as zip_ref:
         for root, dirs, files in os.walk("extracted_bundle"):
             for file in files:
                 zip_ref.write(os.path.join(root, file), os.path.join(os.path.relpath(root, "extracted_bundle"), file))
-
-    # Delete the extracted_bundle directory
-    shutil.rmtree("extracted_bundle")
     
     download_apkeditor()
 
     if not os.path.exists("big_file_merged.apk"):
-        merge_apk("big_file.apks")
+        merge_apk("extracted_bundle")
+        # Delete the extracted_bundle directory
+        shutil.rmtree("extracted_bundle")
     else:
         print("apk bundle is already merged")
+        shutil.rmtree("extracted_bundle")
 
     download_revanced_bins()
 
