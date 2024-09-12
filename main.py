@@ -85,18 +85,18 @@ Changelogs:
 
     build_apks(latest_version)
 
+    # Rename big_file.apkm using the desired_version
+os.rename("big_file.apkm", f"youtube-bundle-v{desired_version}.apkm")
+
     publish_release(
         f"{latest_version.version}_{rvxRelease['tag_name']}",
         [
             f"yt-rvx-v{latest_version.version}.apk",
             f"microg-rvx-v{latest_version.version}.apk",
+            f"youtube-bundle-v{desired_version}.apkm",
         ],
         message,
     )
-
-# Rename big_file.apkm using the desired_version
-    new_filename = f"youtube-bundle-v{desired_version}.apkm"
-    os.rename("big_file.apkm", new_filename)
 
     # Add the renamed file to the assets list
     assets.append(new_filename)
