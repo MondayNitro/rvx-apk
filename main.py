@@ -8,6 +8,7 @@ import apkmirror
 import os
 import shutil
 import zipfile
+import requests
 
 
 def main():
@@ -30,6 +31,19 @@ def main():
 
     if last_build_version is None:
         panic("Failed to fetch the latest build version")
+        return
+
+    # Fetch Revanced patches version information
+    rvx_patches_url = "https://api.github.com/repos/inotia00/revanced-patches/releases/latest"
+    response = requests.get(rvx_patches_url)
+    rvx_patches_data = response.json()
+    rvx_patches_version = rvx_patches_data["tag_name"]
+
+    # Begin stuff
+    if last_build_version.tag_name != f"{latest_version.version}_{rvx_patches_version}":
+        print(f"New version found: {latest_version.version}")
+    else:
+        print("No new version found")
         return
 
     # get bundle and universal variant
