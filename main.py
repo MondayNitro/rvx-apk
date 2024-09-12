@@ -75,7 +75,7 @@ def main():
     
     download_apkeditor()
 
-    if not os.path.exists("big_file_merged.apk"):
+    if not os.path.exists(f"youtube-bundle-v{desired_version}_merged.apk"):
         merge_apk(f"youtube-bundle-v{desired_version}.apks")
     else:
         print("apk bundle is already merged")
