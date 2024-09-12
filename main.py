@@ -12,9 +12,8 @@ import requests
 
 
 def main():
-    # Read desired version from version.txt
-    with open("yt_apk_version.txt", "r") as file:
-        desired_version = file.readline().strip()
+    # Specify the desired version
+    desired_version = "19.16.39"
 
     # Format the version for the URL
     formatted_version = desired_version.replace(".", "-")
