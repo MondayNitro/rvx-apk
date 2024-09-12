@@ -65,7 +65,7 @@ def main():
     keep_files_recursively("extracted_bundle", files_to_keep)
 
     # Create a new ZIP archive with the remaining files
-    with zipfile.ZipFile(f"youtube-bundle-v{desired_version}.apks", "w") as zip_ref:
+    with zipfile.ZipFile("big_file.apks", "w") as zip_ref:
         for root, dirs, files in os.walk("extracted_bundle"):
             for file in files:
                 zip_ref.write(os.path.join(root, file), os.path.join(os.path.relpath(root, "extracted_bundle"), file))
@@ -75,8 +75,8 @@ def main():
     
     download_apkeditor()
 
-    if not os.path.exists(f"youtube-bundle-v{desired_version}_merged.apk"):
-        merge_apk(f"youtube-bundle-v{desired_version}.apks")
+    if not os.path.exists("big_file_merged.apk"):
+        merge_apk("big_file.apks")
     else:
         print("apk bundle is already merged")
 
@@ -104,6 +104,9 @@ Changelogs:
 """
 
     build_apks(latest_version)
+
+    # Rename big_file.apks using the desired_version
+    os.rename("big_file.apks", f"youtube-bundle-v{desired_version}.apks")
 
     publish_release(
         f"{latest_version.version}_{rvxRelease['tag_name']}",
