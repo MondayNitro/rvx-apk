@@ -33,6 +33,7 @@ def build_apks(latest_version: Version):
         "Hide player flyout menu",
         "Hook download actions",
         "Navigation bar components",
+        "Overlay buttons",
         "Player components",
         "Remove background playback restrictions",
         "Sanitize sharing links",
@@ -49,7 +50,7 @@ def build_apks(latest_version: Version):
         integrations,
         patches,
         apk,
-        includes=["Overlay buttons"] + common_includes,
+        includes=common_includes,
         out=f"yt-rvx-v{latest_version.version}.apk",
     )
 
