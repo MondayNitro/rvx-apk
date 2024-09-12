@@ -12,8 +12,9 @@ import requests
 
 
 def main():
-    # Specify the desired version
-    desired_version = "19.16.39"
+    # Read desired version from version.txt
+    with open("yt_apk_version.txt", "r") as file:
+        desired_version = file.readline().strip()
 
     # Format the version for the URL
     formatted_version = desired_version.replace(".", "-")
@@ -45,11 +46,6 @@ def main():
     else:
         print("No new version found")
         return
-
-    #debug
-    print(f"Last build version: {last_build_version.tag_name}")
-    print(f"Combined version: {latest_version.version}_{rvx_patches_version}")
-    print(f"New version found: {latest_version.version}")
 
     # get bundle and universal variant
     variants: list[Variant] = apkmirror.get_variants(latest_version)
