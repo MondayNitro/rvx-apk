@@ -46,6 +46,11 @@ def main():
         print("No new version found")
         return
 
+    #debug
+    print(f"Last build version: {last_build_version.tag_name}")
+    print(f"Combined version: {latest_version.version}_{rvx_patches_version}")
+    print(f"New version found: {latest_version.version}")
+
     # get bundle and universal variant
     variants: list[Variant] = apkmirror.get_variants(latest_version)
 
