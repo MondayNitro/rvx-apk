@@ -6,6 +6,7 @@ from utils import panic, merge_apk, publish_release
 from download_bins import download_release_asset
 import apkmirror
 import os
+import zipfile
 
 
 def main():
@@ -85,15 +86,30 @@ Changelogs:
 
     build_apks(latest_version)
 
-    # Rename big_file.apkm using the desired_version
-    os.rename("big_file.apkm", f"youtube-bundle-v{desired_version}.apkm")
+    # Unpack the APK bundle
+    with zipfile.ZipFile("big_file.apkm", "r") as zip_ref:
+        zip_ref.extractall("extracted_bundle")
+
+    # Keep only the desired files
+    files_to_keep = ["base.apk", "split_config.armeabi_v7a.apk", "split_config.en.apk", "split_config.xhdpi.apk", "split_config.xxhdpi.apk"]
+    for file in os.listdir("extracted_bundle"):
+        if file not in files_to_keep:
+            os.remove(os.path.join("extracted_bundle", file))
+
+    # Create a new ZIP archive with the selected files
+    with zipfile.ZipFile(f"youtube-bundle-v{desired_version}.apks", "w") as zip_ref:
+        for file in files_to_keep:
+            zip_ref.write(os.path.join("extracted_bundle", file), file)
+
+    # Remove the extracted bundle directory
+    os.rmdir("extracted_bundle")
 
     publish_release(
         f"{latest_version.version}_{rvxRelease['tag_name']}",
         [
             f"yt-rvx-v{latest_version.version}.apk",
             f"microg-rvx-v{latest_version.version}.apk",
-            f"youtube-bundle-v{desired_version}.apkm",
+            f"youtube-bundle-v{desired_version}.apks",
         ],
         message,
     )
