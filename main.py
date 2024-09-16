@@ -33,11 +33,17 @@ def main():
         panic("Failed to fetch the latest build version")
         return
 
-    # Fetch Revanced patches version information
-    rvx_patches_url = "https://api.github.com/repos/inotia00/revanced-patches/releases/latest"
-    response = requests.get(rvx_patches_url)
-    rvx_patches_data = response.json()
-    rvx_patches_version = rvx_patches_data["tag_name"]
+    def get_latest_revanced_patches_version(url="https://api.github.com/repos/inotia00/revanced-patches/releases"):
+      response = requests.get(url)
+
+      releases_data = response.json()
+
+      for release in releases_data:
+        tag_name = release.get("tag_name")
+        if tag_name:
+          return tag_name
+
+    rvx_patches_version = get_latest_revanced_patches_version()
 
     # Begin stuff
     if last_build_version.tag_name != f"{latest_version.version}_{rvx_patches_version}":
