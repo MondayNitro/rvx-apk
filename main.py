@@ -34,7 +34,7 @@ def main():
         return
 
     # Fetch Revanced patches version information
-    rvx_patches_url = "https://api.github.com/repos/inotia00/revanced-patches/releases/latest"
+    rvx_patches_url = "https://api.github.com/repos/inotia00/revanced-patches/releases"
     response = requests.get(rvx_patches_url)
     rvx_patches_data = response.json()
     rvx_patches_version = rvx_patches_data["tag_name"]
