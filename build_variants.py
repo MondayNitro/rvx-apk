@@ -44,6 +44,7 @@ def build_apks(latest_version: Version):
         "Theme",
         "Toolbar components",
         "Video playback",
+        "Visual preferences icons",
     ]
 
     patch_apk(
