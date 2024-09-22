@@ -53,6 +53,12 @@
     "value" : true
   } ]
 }, {
+  "patchName" : "Visual preferences icons",
+  "options" : [ {
+    "key" : "RVXSettingsMenuIcon",
+    "value" : "extension"
+  } ]
+}, {
   "patchName" : "SponsorBlock",
   "options" : [ {
     "key" : "OutlineIcon",
