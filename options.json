@@ -23,7 +23,7 @@
   "patchName" : "Custom branding icon for YouTube",
   "options" : [ {
     "key" : "AppIcon",
-    "value" : "youtube"
+    "value" : "youtube_minimal_header"
   }, {
     "key" : "ChangeSplashIcon",
     "value" : false
@@ -53,10 +53,13 @@
     "value" : true
   } ]
 }, {
-  "patchName" : "Visual preferences icons",
+  "patchName" : "Visual preferences icons for YouTube",
   "options" : [ {
     "key" : "RVXSettingsMenuIcon",
-    "value" : "extension"
+    "value" : "yt_alt"
+  }, {
+    "key" : "ApplyToAll",
+    "value" : false
   } ]
 }, {
   "patchName" : "SponsorBlock",
