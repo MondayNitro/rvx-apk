@@ -44,7 +44,7 @@ def build_apks(latest_version: Version):
         "Theme",
         "Toolbar components",
         "Video playback",
-        "Visual preferences icons",
+        "Visual preferences icons for YouTube",
     ]
 
     patch_apk(
