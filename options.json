@@ -17,13 +17,13 @@
   "patchName" : "Custom Shorts action buttons",
   "options" : [ {
     "key" : "IconType",
-    "value" : "youtubeoutline"
+    "value" : "cairo"
   } ]
 }, {
   "patchName" : "Custom branding icon for YouTube",
   "options" : [ {
     "key" : "AppIcon",
-    "value" : "youtube_minimal_header"
+    "value" : "youtube"
   }, {
     "key" : "ChangeSplashIcon",
     "value" : false
