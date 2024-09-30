@@ -47,7 +47,10 @@
     "value" : "thin"
   }, {
     "key" : "BottomMargin",
-    "value" : "0.0dip"
+    "value" : "5.0dip"
+  }, {
+    "key" : "WiderButtonsSpace",
+    "value" : true
   }, {
     "key" : "ChangeTopButtons",
     "value" : true
