@@ -17,7 +17,7 @@
   "patchName" : "Custom Shorts action buttons",
   "options" : [ {
     "key" : "IconType",
-    "value" : "cairo"
+    "value" : "youtubeoutline"
   } ]
 }, {
   "patchName" : "Custom branding icon for YouTube",
