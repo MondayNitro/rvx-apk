@@ -7,11 +7,14 @@
     "key" : "CheckGmsCore",
     "value" : true
   }, {
+    "key" : "DisableGmsServiceBroker",
+    "value" : true
+  }, {
     "key" : "PackageNameYouTube",
-    "value" : "app.revanced.android.youtube"
+    "value" : "app.rvx.android.youtube"
   }, {
     "key" : "PackageNameYouTubeMusic",
-    "value" : "app.revanced.android.apps.youtube.music"
+    "value" : "app.rvx.android.apps.youtube.music"
   } ]
 }, {
   "patchName" : "Custom Shorts action buttons",
