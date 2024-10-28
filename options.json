@@ -8,7 +8,7 @@
     "value" : true
   }, {
     "key" : "DisableGmsServiceBroker",
-    "value" : false
+    "value" : true
   }, {
     "key" : "PackageNameYouTube",
     "value" : "app.revanced.android.youtube"
