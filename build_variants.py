@@ -5,8 +5,7 @@ from utils import patch_apk
 def build_apks(latest_version: Version):
     # patch
     apk = "big_file_merged.apk"
-    integrations = "bins/integrations.apk"
-    patches = "bins/patches.jar"
+    patches = "bins/patches.rvp"
     cli = "bins/cli.jar"
 
     common_includes = [
