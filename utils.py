@@ -43,7 +43,6 @@ def merge_apk(path: str):
 
 def patch_apk(
     cli: str,
-    integrations: str,
     patches: str,
     apk: str,
     includes: list[str] | None = None,
@@ -55,26 +54,24 @@ def patch_apk(
         "-jar",
         cli,
         "patch",
-        "-b",
+        "-p",
         patches,
-        "-m",
-        integrations,
         "--unsigned",
         "--exclusive",
         "--rip-lib=x86_64",
         "--rip-lib=x86",
         "--rip-lib=arm64-v8a",
-        "--options=options.json",
+        "--legacy-options=options.json",
     ]
 
     if includes is not None:
         for i in includes:
-            command.append("-i")
+            command.append("-e")
             command.append(i)
 
     if excludes is not None:
         for e in excludes:
-            command.append("-e")
+            command.append("-d")
             command.append(e)
 
     command.append(apk)

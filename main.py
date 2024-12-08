@@ -104,23 +104,12 @@ def main():
 
     print("Downloading patches")
     rvxRelease = download_release_asset(
-        "inotia00/revanced-patches", "^rev.*jar$", "bins", "patches.jar"
+        "inotia00/revanced-patches", "^patches.*rvp$", "bins", "patches.rvp"
     )
-
-    print("Downloading integrations")
-    integrationsRelease = download_release_asset(
-        "inotia00/revanced-integrations",
-        "^rev.*apk$",
-        "bins",
-        "integrations.apk",
-    )
-
-    print(integrationsRelease["body"])
 
     message: str = f"""
 Changelogs:
 [rvx-{rvxRelease["tag_name"]}]({rvxRelease["html_url"]})
-[integrations-{integrationsRelease["tag_name"]}]({integrationsRelease["html_url"]})
 """
 
     build_apks(latest_version)
