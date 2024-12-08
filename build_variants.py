@@ -49,7 +49,6 @@ def build_apks(latest_version: Version):
 
     patch_apk(
         cli,
-        integrations,
         patches,
         apk,
         includes=common_includes,
@@ -58,7 +57,6 @@ def build_apks(latest_version: Version):
 
     patch_apk(
         cli,
-        integrations,
         patches,
         apk,
         includes=["GmsCore support"] + common_includes,
