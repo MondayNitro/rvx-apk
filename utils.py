@@ -54,7 +54,7 @@ def patch_apk(
         "-jar",
         cli,
         "patch",
-        apk
+        apk,
         "-p",
         patches,
         "--unsigned",
