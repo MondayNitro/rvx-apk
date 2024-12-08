@@ -43,7 +43,6 @@ def merge_apk(path: str):
 
 def patch_apk(
     cli: str,
-    integrations: str,
     patches: str,
     apk: str,
     includes: list[str] | None = None,
@@ -55,10 +54,9 @@ def patch_apk(
         "-jar",
         cli,
         "patch",
-        "-b",
+        apk
+        "-p",
         patches,
-        "-m",
-        integrations,
         "--unsigned",
         "--exclusive",
         "--rip-lib=x86_64",
