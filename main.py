@@ -104,7 +104,7 @@ def main():
 
     print("Downloading patches")
     rvxRelease = download_release_asset(
-        "inotia00/revanced-patches", "^pat.*rvp$", "bins", "patches.rvp"
+        "inotia00/revanced-patches", "^patches.*rvp$", "bins", "patches.rvp"
     )
 
     print(rvxRelease["body"])
