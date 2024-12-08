@@ -107,6 +107,8 @@ def main():
         "inotia00/revanced-patches", "^pat.*rvp$", "bins", "patches.rvp"
     )
 
+    print(rvxRelease["body"])
+
     message: str = f"""
 Changelogs:
 [rvx-{rvxRelease["tag_name"]}]({rvxRelease["html_url"]})
