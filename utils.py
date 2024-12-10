@@ -61,7 +61,6 @@ def patch_apk(
         "--rip-lib=x86_64",
         "--rip-lib=x86",
         "--rip-lib=arm64-v8a",
-        "--legacy-options=options.json",
     ]
 
     if includes is not None:
