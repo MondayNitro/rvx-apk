@@ -58,9 +58,6 @@ def patch_apk(
         patches,
         "--unsigned",
         "--exclusive",
-        "--rip-lib=x86_64",
-        "--rip-lib=x86",
-        "--rip-lib=arm64-v8a",
         "--legacy-options=options.json",
     ]
 
