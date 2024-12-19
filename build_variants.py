@@ -40,7 +40,6 @@ def build_apks(latest_version: Version):
         "Seekbar components",
         "Shorts components",
         "SponsorBlock",
-        "Swipe controls",
         "Theme",
         "Toolbar components",
         "Video playback",
