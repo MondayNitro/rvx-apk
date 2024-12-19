@@ -54,11 +54,12 @@ def patch_apk(
         "-jar",
         cli,
         "patch",
+        "--exclusive",
+        "--purge",
+        "--unsigned",
+        "--legacy-options=options.json",
         "-p",
         patches,
-        "--unsigned",
-        "--exclusive",
-        "--legacy-options=options.json",
     ]
 
     if includes is not None:
