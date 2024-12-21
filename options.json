@@ -1,9 +1,6 @@
 [ {
   "patchName" : "Change version code",
   "options" : [ {
-    "key" : "changeVersionCode",
-    "value" : false
-  }, {
     "key" : "versionCode",
     "value" : "2147483647"
   } ]
