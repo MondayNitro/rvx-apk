@@ -38,6 +38,7 @@ def build_apks(latest_version: Version):
         "Remove background playback restrictions",
         "Sanitize sharing links",
         "Seekbar components",
+        "Settings for YouTube",
         "Shorts components",
         "SponsorBlock",
         "Theme",
