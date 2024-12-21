@@ -50,6 +50,9 @@ def patch_apk(
     out: str | None = None,
 ):
     command = [
+        "env"
+        "-u"
+        "GITHUB_REPOSITORY"
         "java",
         "-jar",
         cli,
