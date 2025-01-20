@@ -98,7 +98,7 @@
   "patchName" : "Custom branding icon for YouTube",
   "options" : [ {
     "key" : "appIcon",
-    "value" : "youtube"
+    "value" : "afn_red"
   }, {
     "key" : "changeSplashIcon",
     "value" : false
