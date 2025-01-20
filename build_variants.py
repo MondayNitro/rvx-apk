@@ -9,6 +9,7 @@ def build_apks(latest_version: Version):
     cli = "bins/cli.jar"
 
     common_includes = [
+        "Change live ring click action",
         "Change share sheet",
         "Change start page",
         "Custom branding icon for YouTube",
