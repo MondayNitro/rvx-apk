@@ -41,6 +41,7 @@ def build_apks(latest_version: Version):
         "Seekbar components",
         "Settings for YouTube",
         "Shorts components",
+        "Snack bar components",
         "SponsorBlock",
         "Theme",
         "Toolbar components",
