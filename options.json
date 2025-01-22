@@ -32,6 +32,15 @@
     "value" : "custom_branding_icon"
   } ]
 }, {
+  "patchName" : "Dark theme",
+  "options" : [ {
+    "key" : "darkThemeBackgroundColor",
+    "value" : "@android:color/black"
+  }, {
+    "key" : "materialYou",
+    "value" : false
+  } ]
+}, {
   "patchName" : "Translations for YouTube Music",
   "options" : [ {
     "key" : "customTranslations",
@@ -89,6 +98,21 @@
     "value" : "ReVanced Extended"
   } ]
 }, {
+  "patchName" : "Snack bar components",
+  "options" : [ {
+    "key" : "cornerRadius",
+    "value" : "8.0dip"
+  }, {
+    "key" : "darkThemeBackgroundColor",
+    "value" : "#FF2A2A2A"
+  }, {
+    "key" : "lightThemeBackgroundColor",
+    "value" : "#FFF2F2F2"
+  }, {
+    "key" : "strokeColor",
+    "value" : ""
+  } ]
+}, {
   "patchName" : "Custom Shorts action buttons",
   "options" : [ {
     "key" : "iconType",
@@ -110,7 +134,7 @@
   "patchName" : "Custom branding name for YouTube",
   "options" : [ {
     "key" : "appName",
-    "value" : "YouTube"
+    "value" : "RVX"
   } ]
 }, {
   "patchName" : "Custom double tap length",
@@ -167,6 +191,12 @@
     "value" : "yt_alt"
   }, {
     "key" : "applyToAll",
+    "value" : false
+  } ]
+}, {
+  "patchName" : "Hide action buttons",
+  "options" : [ {
+    "key" : "hideActionButtonByIndex",
     "value" : false
   } ]
 }, {
