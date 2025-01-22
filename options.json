@@ -146,7 +146,7 @@
   "patchName" : "Custom header for YouTube",
   "options" : [ {
     "key" : "customHeader",
-    "value" : "/minimal_header/"
+    "value" : "/minimal_header"
   } ]
 }, {
   "patchName" : "Hide shortcuts",
