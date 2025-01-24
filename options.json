@@ -101,13 +101,13 @@
   "patchName" : "Snack bar components",
   "options" : [ {
     "key" : "cornerRadius",
-    "value" : "8.0dip"
+    "value" : "27.0dip"
   }, {
     "key" : "darkThemeBackgroundColor",
     "value" : "#FF2A2A2A"
   }, {
     "key" : "lightThemeBackgroundColor",
-    "value" : "#FFF2F2F2"
+    "value" : "#FFE6E6E6"
   }, {
     "key" : "strokeColor",
     "value" : ""
