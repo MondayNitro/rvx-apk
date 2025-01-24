@@ -13,7 +13,6 @@ def build_apks(latest_version: Version):
         "Change share sheet",
         "Change start page",
         "Custom branding icon for YouTube",
-        "Custom header for YouTube",
         "Custom Shorts action buttons",
         "Description components",
         "Disable auto captions",
