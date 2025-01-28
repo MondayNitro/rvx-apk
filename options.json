@@ -104,10 +104,10 @@
     "value" : "27.0dip"
   }, {
     "key" : "darkThemeBackgroundColor",
-    "value" : "?ytBaseBackground"
+    "value" : "#FF2A2A2A"
   }, {
     "key" : "lightThemeBackgroundColor",
-    "value" : "?ytBaseBackground"
+    "value" : "#FFF2F2F2"
   }, {
     "key" : "strokeColor",
     "value" : ""
