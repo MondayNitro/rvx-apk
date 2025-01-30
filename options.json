@@ -197,7 +197,7 @@
   "patchName" : "Hide action buttons",
   "options" : [ {
     "key" : "hideActionButtonByIndex",
-    "value" : false
+    "value" : true
   } ]
 }, {
   "patchName" : "Overlay buttons",
