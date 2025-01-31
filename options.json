@@ -101,7 +101,10 @@
   "patchName" : "Snack bar components",
   "options" : [ {
     "key" : "cornerRadius",
-    "value" : "27.0dip"
+    "value" : "24.0dip"
+  }, {
+    "key" : "applyCornerRadiusToPlaylistBottomBar",
+    "value" : true
   }, {
     "key" : "darkThemeBackgroundColor",
     "value" : "#FF2A2A2A"
