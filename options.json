@@ -76,8 +76,8 @@
 }, {
   "patchName" : "Settings for YouTube Music",
   "options" : [ {
-    "key" : "settingsLabel",
-    "value" : "ReVanced Extended"
+    "key" : "rvxSettingsLabel",
+    "value" : "RVX Settings"
   } ]
 }, {
   "patchName" : "Custom branding name for Reddit",
@@ -94,8 +94,8 @@
 }, {
   "patchName" : "Settings for Reddit",
   "options" : [ {
-    "key" : "settingsLabel",
-    "value" : "ReVanced Extended"
+    "key" : "rvxSettingsLabel",
+    "value" : "RVX Settings"
   } ]
 }, {
   "patchName" : "Snack bar components",
@@ -149,7 +149,7 @@
   "patchName" : "Custom header for YouTube",
   "options" : [ {
     "key" : "customHeader",
-    "value" : "minimal_header"
+    "value" : "custom_branding_icon"
   } ]
 }, {
   "patchName" : "Hide shortcuts",
@@ -197,12 +197,6 @@
     "value" : false
   } ]
 }, {
-  "patchName" : "Hide action buttons",
-  "options" : [ {
-    "key" : "hideActionButtonByIndex",
-    "value" : true
-  } ]
-}, {
   "patchName" : "Overlay buttons",
   "options" : [ {
     "key" : "iconType",
@@ -223,7 +217,7 @@
     "key" : "insertPosition",
     "value" : "@string/about_key"
   }, {
-    "key" : "settingsLabel",
+    "key" : "rvxSettingsLabel",
     "value" : "RVX Settings"
   } ]
 }, {
