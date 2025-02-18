@@ -101,7 +101,7 @@
   "patchName" : "Snack bar components",
   "options" : [ {
     "key" : "cornerRadius",
-    "value" : "24.0dip"
+    "value" : "10.0dip"
   }, {
     "key" : "applyCornerRadiusToPlaylistBottomBar",
     "value" : true
@@ -224,7 +224,7 @@
     "value" : "@string/about_key"
   }, {
     "key" : "settingsLabel",
-    "value" : "ReVanced Extended"
+    "value" : "RVX Settings"
   } ]
 }, {
   "patchName" : "SponsorBlock",
