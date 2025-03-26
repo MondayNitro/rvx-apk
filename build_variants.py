@@ -42,6 +42,7 @@ def build_apks(latest_version: Version):
         "Shorts components",
         "Snack bar components",
         "SponsorBlock",
+        "Swipe controls",
         "Theme",
         "Toolbar components",
         "Video playback",
