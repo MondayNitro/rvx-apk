@@ -32,7 +32,6 @@ def build_apks(latest_version: Version):
         "Hide player buttons",
         "Hide player flyout menu",
         "Hook download actions",
-        "Miniplayer",
         "Navigation bar components",
         "Overlay buttons",
         "Player components",
