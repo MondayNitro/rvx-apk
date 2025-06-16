@@ -1,170 +1,191 @@
 [ {
+  "patchName" : "Spoof build info",
+  "options" : [ {
+    "key" : "board",
+    "value" : null
+  }, {
+    "key" : "bootloader",
+    "value" : null
+  }, {
+    "key" : "brand",
+    "value" : null
+  }, {
+    "key" : "cpu-abi",
+    "value" : null
+  }, {
+    "key" : "cpu-abi-2",
+    "value" : null
+  }, {
+    "key" : "device",
+    "value" : null
+  }, {
+    "key" : "display",
+    "value" : null
+  }, {
+    "key" : "fingerprint",
+    "value" : null
+  }, {
+    "key" : "hardware",
+    "value" : null
+  }, {
+    "key" : "host",
+    "value" : null
+  }, {
+    "key" : "id",
+    "value" : null
+  }, {
+    "key" : "manufacturer",
+    "value" : null
+  }, {
+    "key" : "model",
+    "value" : null
+  }, {
+    "key" : "odm-sku",
+    "value" : null
+  }, {
+    "key" : "product",
+    "value" : null
+  }, {
+    "key" : "radio",
+    "value" : null
+  }, {
+    "key" : "serial",
+    "value" : null
+  }, {
+    "key" : "sku",
+    "value" : null
+  }, {
+    "key" : "soc-manufacturer",
+    "value" : null
+  }, {
+    "key" : "soc-model",
+    "value" : null
+  }, {
+    "key" : "tags",
+    "value" : null
+  }, {
+    "key" : "time",
+    "value" : null
+  }, {
+    "key" : "type",
+    "value" : null
+  }, {
+    "key" : "user",
+    "value" : null
+  } ]
+}, {
+  "patchName" : "Spoof SIM country",
+  "options" : [ {
+    "key" : "networkCountryIso",
+    "value" : null
+  }, {
+    "key" : "simCountryIso",
+    "value" : null
+  } ]
+}, {
+  "patchName" : "Hex",
+  "options" : [ {
+    "key" : "replacements",
+    "value" : null
+  } ]
+}, {
+  "patchName" : "Change package name",
+  "options" : [ {
+    "key" : "packageName",
+    "value" : "Default"
+  }, {
+    "key" : "updatePermissions",
+    "value" : false
+  }, {
+    "key" : "updateProviders",
+    "value" : false
+  } ]
+}, {
   "patchName" : "Change version code",
   "options" : [ {
     "key" : "versionCode",
-    "value" : "2147483647"
-  } ]
-}, {
-  "patchName" : "Custom branding icon for YouTube Music",
-  "options" : [ {
-    "key" : "appIcon",
-    "value" : "revancify_blue"
-  }, {
-    "key" : "changeSplashIcon",
-    "value" : true
-  }, {
-    "key" : "restoreOldSplashIcon",
-    "value" : false
-  } ]
-}, {
-  "patchName" : "Custom branding name for YouTube Music",
-  "options" : [ {
-    "key" : "appNameNotification",
-    "value" : "RVX Music"
-  }, {
-    "key" : "appNameLauncher",
-    "value" : "RVX Music"
-  } ]
-}, {
-  "patchName" : "Custom header for YouTube Music",
-  "options" : [ {
-    "key" : "customHeader",
-    "value" : "custom_branding_icon"
-  } ]
-}, {
-  "patchName" : "Dark theme",
-  "options" : [ {
-    "key" : "darkThemeBackgroundColor",
-    "value" : "@android:color/black"
-  }, {
-    "key" : "materialYou",
-    "value" : false
-  } ]
-}, {
-  "patchName" : "Translations for YouTube Music",
-  "options" : [ {
-    "key" : "customTranslations",
-    "value" : ""
-  }, {
-    "key" : "selectedTranslations",
-    "value" : "bg-rBG, bn, cs-rCZ, el-rGR, es-rES, fr-rFR, hu-rHU, id-rID, in, it-rIT, ja-rJP, ko-rKR, nl-rNL, pl-rPL, pt-rBR, ro-rRO, ru-rRU, tr-rTR, uk-rUA, vi-rVN, zh-rCN, zh-rTW"
-  }, {
-    "key" : "selectedStringResources",
-    "value" : "af, am, ar, ar-rXB, as, az, b+es+419, b+sr+Latn, be, bg, bn, bs, ca, cs, da, de, el, en-rAU, en-rCA, en-rGB, en-rIN, en-rXA, en-rXC, es, es-rUS, et, eu, fa, fi, fr, fr-rCA, gl, gu, hi, hr, hu, hy, id, in, is, it, iw, ja, ka, kk, km, kn, ko, ky, lo, lt, lv, mk, ml, mn, mr, ms, my, nb, ne, nl, no, or, pa, pl, pt, pt-rBR, pt-rPT, ro, ru, si, sk, sl, sq, sr, sv, sw, ta, te, th, tl, tr, uk, ur, uz, vi, zh, zh-rCN, zh-rHK, zh-rTW, zu"
-  } ]
-}, {
-  "patchName" : "Visual preferences icons for YouTube Music",
-  "options" : [ {
-    "key" : "settingsMenuIcon",
-    "value" : "extension"
+    "value" : 2147483647
   } ]
 }, {
   "patchName" : "GmsCore support",
   "options" : [ {
     "key" : "gmsCoreVendorGroupId",
     "value" : "app.revanced"
-  }, {
-    "key" : "checkGmsCore",
-    "value" : true
-  }, {
-    "key" : "packageNameYouTube",
-    "value" : "app.revanced.android.youtube"
-  }, {
-    "key" : "packageNameYouTubeMusic",
-    "value" : "app.revanced.android.apps.youtube.music"
   } ]
 }, {
-  "patchName" : "Settings for YouTube Music",
+  "patchName" : "Spoof features",
   "options" : [ {
-    "key" : "rvxSettingsLabel",
-    "value" : "RVX Settings"
+    "key" : "featuresToEnable",
+    "value" : [ "com.google.android.apps.photos.NEXUS_PRELOAD", "com.google.android.apps.photos.nexus_preload" ]
+  }, {
+    "key" : "featuresToDisable",
+    "value" : [ "com.google.android.apps.photos.PIXEL_2017_PRELOAD", "com.google.android.apps.photos.PIXEL_2018_PRELOAD", "com.google.android.apps.photos.PIXEL_2019_MIDYEAR_PRELOAD", "com.google.android.apps.photos.PIXEL_2019_PRELOAD", "com.google.android.feature.PIXEL_2020_MIDYEAR_EXPERIENCE", "com.google.android.feature.PIXEL_2020_EXPERIENCE", "com.google.android.feature.PIXEL_2021_MIDYEAR_EXPERIENCE", "com.google.android.feature.PIXEL_2021_EXPERIENCE", "com.google.android.feature.PIXEL_2022_MIDYEAR_EXPERIENCE", "com.google.android.feature.PIXEL_2022_EXPERIENCE", "com.google.android.feature.PIXEL_2023_MIDYEAR_EXPERIENCE", "com.google.android.feature.PIXEL_2023_EXPERIENCE", "com.google.android.feature.PIXEL_2024_MIDYEAR_EXPERIENCE", "com.google.android.feature.PIXEL_2024_EXPERIENCE", "com.google.android.feature.PIXEL_2025_MIDYEAR_EXPERIENCE" ]
   } ]
 }, {
-  "patchName" : "Custom branding name for Reddit",
+  "patchName" : "Spoof Android device ID",
+  "options" : [ {
+    "key" : "android-device-id",
+    "value" : "0011223344556677"
+  } ]
+}, {
+  "patchName" : "Spoof client",
+  "options" : [ {
+    "key" : "client-id",
+    "value" : null
+  } ]
+}, {
+  "patchName" : "Custom theme",
+  "options" : [ {
+    "key" : "backgroundColor",
+    "value" : "@android:color/black"
+  }, {
+    "key" : "overridePlayerGradientColor",
+    "value" : false
+  }, {
+    "key" : "backgroundColorSecondary",
+    "value" : "#FF121212"
+  }, {
+    "key" : "accentColor",
+    "value" : "#FF1ED760"
+  }, {
+    "key" : "accentColorPressed",
+    "value" : "#FF1ABC54"
+  } ]
+}, {
+  "patchName" : "Change lyrics provider",
+  "options" : [ {
+    "key" : "lyricsProviderHost",
+    "value" : "lyrics.natanchiodi.fr"
+  } ]
+}, {
+  "patchName" : "Change link sharing domain",
+  "options" : [ {
+    "key" : "domainName",
+    "value" : "fxtwitter.com"
+  } ]
+}, {
+  "patchName" : "Custom branding",
   "options" : [ {
     "key" : "appName",
-    "value" : "Reddit"
+    "value" : "YouTube ReVanced"
+  }, {
+    "key" : "iconPath",
+    "value" : "ReVanced*Logo"
   } ]
 }, {
-  "patchName" : "Change package name",
+  "patchName" : "Change header",
   "options" : [ {
-    "key" : "packageNameReddit",
-    "value" : "com.reddit.frontpage"
+    "key" : "header",
+    "value" : "revanced*borderless"
   } ]
 }, {
-  "patchName" : "Settings for Reddit",
+  "patchName" : "Hide Shorts components",
   "options" : [ {
-    "key" : "rvxSettingsLabel",
-    "value" : "RVX Settings"
-  } ]
-}, {
-  "patchName" : "Snack bar components",
-  "options" : [ {
-    "key" : "cornerRadius",
-    "value" : "10.0dip"
-  }, {
-    "key" : "applyCornerRadiusToPlaylistBottomBar",
-    "value" : true
-  }, {
-    "key" : "darkThemeBackgroundColor",
-    "value" : "#FF2A2A2A"
-  }, {
-    "key" : "lightThemeBackgroundColor",
-    "value" : "#FFF2F2F2"
-  }, {
-    "key" : "strokeColor",
-    "value" : ""
-  } ]
-}, {
-  "patchName" : "Custom Shorts action buttons",
-  "options" : [ {
-    "key" : "iconType",
-    "value" : "youtubeoutline"
-  } ]
-}, {
-  "patchName" : "Custom branding icon for YouTube",
-  "options" : [ {
-    "key" : "appIcon",
-    "value" : "youtube"
-  }, {
-    "key" : "changeSplashIcon",
+    "key" : "hideShortsAppShortcut",
     "value" : false
   }, {
-    "key" : "restoreOldSplashAnimation",
-    "value" : true
-  } ]
-}, {
-  "patchName" : "Custom branding name for YouTube",
-  "options" : [ {
-    "key" : "appName",
-    "value" : "RVX"
-  } ]
-}, {
-  "patchName" : "Custom double tap length",
-  "options" : [ {
-    "key" : "doubleTapLengthArrays",
-    "value" : "3, 5, 10, 15, 20, 30, 60, 120, 180"
-  } ]
-}, {
-  "patchName" : "Custom header for YouTube",
-  "options" : [ {
-    "key" : "customHeader",
-    "value" : "custom_branding_icon"
-  } ]
-}, {
-  "patchName" : "Hide shortcuts",
-  "options" : [ {
-    "key" : "explore",
+    "key" : "hideShortsWidget",
     "value" : false
-  }, {
-    "key" : "subscriptions",
-    "value" : false
-  }, {
-    "key" : "search",
-    "value" : false
-  }, {
-    "key" : "shorts",
-    "value" : true
   } ]
 }, {
   "patchName" : "Theme",
@@ -174,56 +195,5 @@
   }, {
     "key" : "lightThemeBackgroundColor",
     "value" : "@android:color/white"
-  } ]
-}, {
-  "patchName" : "Translations for YouTube",
-  "options" : [ {
-    "key" : "customTranslations",
-    "value" : ""
-  }, {
-    "key" : "selectedTranslations",
-    "value" : "ar, bg-rBG, de-rDE, el-rGR, es-rES, fr-rFR, hu-rHU, it-rIT, ja-rJP, ko-rKR, pl-rPL, pt-rBR, ru-rRU, tr-rTR, uk-rUA, vi-rVN, zh-rCN, zh-rTW"
-  }, {
-    "key" : "selectedStringResources",
-    "value" : "af, am, ar, ar-rXB, as, az, b+es+419, b+sr+Latn, be, bg, bn, bs, ca, cs, da, de, el, en-rAU, en-rCA, en-rGB, en-rIN, en-rXA, en-rXC, es, es-rUS, et, eu, fa, fi, fr, fr-rCA, gl, gu, hi, hr, hu, hy, id, in, is, it, iw, ja, ka, kk, km, kn, ko, ky, lo, lt, lv, mk, ml, mn, mr, ms, my, nb, ne, nl, no, or, pa, pl, pt, pt-rBR, pt-rPT, ro, ru, si, sk, sl, sq, sr, sv, sw, ta, te, th, tl, tr, uk, ur, uz, vi, zh, zh-rCN, zh-rHK, zh-rTW, zu"
-  } ]
-}, {
-  "patchName" : "Visual preferences icons for YouTube",
-  "options" : [ {
-    "key" : "settingsMenuIcon",
-    "value" : "yt_alt"
-  }, {
-    "key" : "applyToAll",
-    "value" : false
-  } ]
-}, {
-  "patchName" : "Overlay buttons",
-  "options" : [ {
-    "key" : "iconType",
-    "value" : "thin"
-  }, {
-    "key" : "bottomMargin",
-    "value" : "5.0dip"
-  }, {
-    "key" : "widerButtonsSpace",
-    "value" : true
-  }, {
-    "key" : "changeTopButtons",
-    "value" : true
-  } ]
-}, {
-  "patchName" : "Settings for YouTube",
-  "options" : [ {
-    "key" : "insertPosition",
-    "value" : "@string/about_key"
-  }, {
-    "key" : "rvxSettingsLabel",
-    "value" : "RVX Settings"
-  } ]
-}, {
-  "patchName" : "SponsorBlock",
-  "options" : [ {
-    "key" : "outlineIcon",
-    "value" : true
   } ]
 } ]
