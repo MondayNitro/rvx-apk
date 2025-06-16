@@ -13,7 +13,7 @@ import requests
 
 def main():
     # Specify the desired version
-    desired_version = "20.03.43"
+    desired_version = "20.12.46"
 
     # Format the version for the URL
     formatted_version = desired_version.replace(".", "-")
@@ -33,7 +33,7 @@ def main():
         panic("Failed to fetch the latest build version")
         return
 
-    def get_latest_revanced_patches_version(url="https://api.github.com/repos/inotia00/revanced-patches/releases"):
+    def get_latest_revanced_patches_version(url="https://api.github.com/repos/Revanced/revanced-patches/releases"):
       response = requests.get(url)
 
       releases_data = response.json()
@@ -43,10 +43,10 @@ def main():
         if tag_name:
           return tag_name
 
-    rvx_patches_version = get_latest_revanced_patches_version()
+    revanced_patches_version = get_latest_revanced_patches_version()
 
     # Begin stuff
-    if last_build_version.tag_name != f"{latest_version.version}_{rvx_patches_version}":
+    if last_build_version.tag_name != f"{latest_version.version}_{revanced_patches_version}":
         print(f"New version found: {latest_version.version}")
     else:
         print("No new version found")
@@ -103,13 +103,13 @@ def main():
     download_revanced_bins()
 
     print("Downloading patches")
-    rvxRelease = download_release_asset(
-        "inotia00/revanced-patches", "^patches.*rvp$", "bins", "patches.rvp"
+    revancedRelease = download_release_asset(
+        "Revanced/revanced-patches", "^patches.*rvp$", "bins", "patches.rvp"
     )
 
     message: str = f"""
 Changelogs:
-[rvx-{rvxRelease["tag_name"]}]({rvxRelease["html_url"]})
+[revanced-{revancedRelease["tag_name"]}]({revancedRelease["html_url"]})
 """
 
     build_apks(latest_version)
@@ -118,10 +118,10 @@ Changelogs:
     os.rename("big_file.apks", f"youtube-bundle-v{desired_version}.apks")
 
     publish_release(
-        f"{latest_version.version}_{rvxRelease['tag_name']}",
+        f"{latest_version.version}_{revancedRelease['tag_name']}",
         [
-            f"yt-rvx-v{latest_version.version}.apk",
-            f"microg-rvx-v{latest_version.version}.apk",
+            f"yt-revanced-v{latest_version.version}.apk",
+            f"microg-revanced-v{latest_version.version}.apk",
             f"youtube-bundle-v{desired_version}.apks",
         ],
         message,
