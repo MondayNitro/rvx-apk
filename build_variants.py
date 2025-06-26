@@ -53,7 +53,7 @@ def build_apks(latest_version: Version):
         cli,
         patches,
         apk,
-        includes=common_includes,
+        includes=["Spoof app signature"] + common_includes,
         out=f"yt-rvx-v{latest_version.version}.apk",
     )
 
