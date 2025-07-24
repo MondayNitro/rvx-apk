@@ -5,6 +5,12 @@
     "value" : "2147483647"
   } ]
 }, {
+  "patchName" : "Hide ads",
+  "options" : [ {
+    "key" : "hideFullscreenAds",
+    "value" : true
+  } ]
+}, {
   "patchName" : "Custom branding icon for YouTube Music",
   "options" : [ {
     "key" : "appIcon",
@@ -72,6 +78,9 @@
   }, {
     "key" : "packageNameYouTubeMusic",
     "value" : "app.revanced.android.apps.youtube.music"
+  }, {
+    "key" : "patchAllManifest",
+    "value" : false
   } ]
 }, {
   "patchName" : "Settings for YouTube Music",
@@ -182,7 +191,7 @@
     "value" : ""
   }, {
     "key" : "selectedTranslations",
-    "value" : "ar, bg-rBG, de-rDE, el-rGR, es-rES, fr-rFR, hu-rHU, it-rIT, ja-rJP, ko-rKR, pl-rPL, pt-rBR, ru-rRU, tr-rTR, uk-rUA, vi-rVN, zh-rCN, zh-rTW"
+    "value" : "ar, bg-rBG, de-rDE, el-rGR, es-rES, fr-rFR, hu-rHU, id-rID, in, it-rIT, ja-rJP, ko-rKR, pl-rPL, pt-rBR, ru-rRU, tr-rTR, uk-rUA, vi-rVN, zh-rCN, zh-rTW"
   }, {
     "key" : "selectedStringResources",
     "value" : "af, am, ar, ar-rXB, as, az, b+es+419, b+sr+Latn, be, bg, bn, bs, ca, cs, da, de, el, en-rAU, en-rCA, en-rGB, en-rIN, en-rXA, en-rXC, es, es-rUS, et, eu, fa, fi, fr, fr-rCA, gl, gu, hi, hr, hu, hy, id, in, is, it, iw, ja, ka, kk, km, kn, ko, ky, lo, lt, lv, mk, ml, mn, mr, ms, my, nb, ne, nl, no, or, pa, pl, pt, pt-rBR, pt-rPT, ro, ru, si, sk, sl, sq, sr, sv, sw, ta, te, th, tl, tr, uk, ur, uz, vi, zh, zh-rCN, zh-rHK, zh-rTW, zu"
@@ -210,6 +219,15 @@
   }, {
     "key" : "changeTopButtons",
     "value" : true
+  } ]
+}, {
+  "patchName" : "Spoof streaming data",
+  "options" : [ {
+    "key" : "outlineIcon",
+    "value" : true
+  }, {
+    "key" : "useIOSClient",
+    "value" : false
   } ]
 }, {
   "patchName" : "Settings for YouTube",
