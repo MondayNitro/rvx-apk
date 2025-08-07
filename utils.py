@@ -68,7 +68,6 @@ def patch_apk(
         "--purge",
         "--unsigned",
         "--legacy-options=options.json",
-        "--merge minimal_header/"
         "-p",
         patches,
     ]
