@@ -9,6 +9,7 @@ def build_apks(latest_version: Version):
     cli = "bins/cli.jar"
 
     common_includes = [
+        "Bypass URL redirects",
         "Change share sheet",
         "Change start page",
         "Custom branding icon for YouTube",
@@ -16,6 +17,7 @@ def build_apks(latest_version: Version):
         "Custom Shorts action buttons",
         "Description components",
         "Disable auto captions",
+        "Disable forced auto audio tracks",
         "Disable haptic feedback",
         "Disable resuming Shorts on startup",
         "Disable splash animation",
@@ -34,6 +36,7 @@ def build_apks(latest_version: Version):
         "Hide player flyout menu",
         "Hook download actions",
         "Navigation bar components",
+        "Open links externally",
         "Overlay buttons",
         "Player components",
         "Remove background playback restrictions",
