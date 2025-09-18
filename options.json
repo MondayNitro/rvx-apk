@@ -158,7 +158,7 @@
   "patchName" : "Custom header for YouTube",
   "options" : [ {
     "key" : "customHeader",
-    "value" : "custom_branding_icon"
+    "value" : "minimal_header"
   } ]
 }, {
   "patchName" : "Hide shortcuts",
