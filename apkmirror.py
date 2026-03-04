@@ -1,9 +1,15 @@
 from dataclasses import dataclass
 from typing import cast
 from bs4 import BeautifulSoup, Tag
+import requests
+
 from utils import download, get_browser_session
 
-session = get_browser_session()
+BASE_URL = "https://www.apkmirror.com"
+
+
+def get_session() -> requests.Session:
+    return get_browser_session()
 
 
 @dataclass
@@ -16,7 +22,7 @@ class Version:
 class Variant:
     is_bundle: bool
     link: str
-    arcithecture: str
+    architecture: str
 
 
 @dataclass
@@ -26,99 +32,123 @@ class App:
 
 
 class FailedToFindElement(Exception):
-    def __init__(self, message=None) -> None:
-        self.message = (
-            f"Failed to find element{' ' + message if message is not None else ''}"
-        )
-        super().__init__(self.message)
+    def __init__(self, message: str | None = None) -> None:
+        suffix = f" {message}" if message else ""
+        super().__init__(f"Failed to find element{suffix}")
 
 
 class FailedToFetch(Exception):
-    def __init__(self, url=None) -> None:
-        self.message = f"Failed to fetch{' ' + url if url is not None else ''}"
-        super().__init__(self.message)
+    def __init__(self, url: str | None = None) -> None:
+        suffix = f" {url}" if url else ""
+        super().__init__(f"Failed to fetch{suffix}")
 
 
 def get_versions(url: str) -> list[Version]:
-    response = session.get(url)
-    if response.status_code != 200:
-        raise FailedToFetch(f"{url}: {response.status_code}")
+    session = get_session()
+    r = session.get(url)
+    try:
+        r.raise_for_status()
+        soup = BeautifulSoup(r.text, "html.parser")
+    finally:
+        r.close()
 
-    soup = BeautifulSoup(response.text, "html.parser")
-    versions = soup.find("div", attrs={"class": "listWidget"})
+    versions_div = soup.find("div", class_="listWidget")
+    if not versions_div:
+        return []
 
     out: list[Version] = []
-    if versions:
-        for versionRow in cast(Tag, versions).findChildren("div", recursive=False)[1:]:
-            version = versionRow.find("span", {"class": "infoSlide-value"})
-            if version is None:
-                continue
+    rows = cast(Tag, versions_div).find_all("div", recursive=False)[1:]
 
-            version_str = version.string.strip()
-            link = f"https://www.apkmirror.com{versionRow.find('a')['href']}"
-            out.append(Version(version=version_str, link=link))
+    for row in rows:
+        version_tag = row.find("span", class_="infoSlide-value")
+        link_tag = row.find("a")
+
+        if not version_tag or not link_tag or not link_tag.get("href"):
+            continue
+
+        out.append(
+            Version(
+                version=version_tag.get_text(strip=True),
+                link=f"{BASE_URL}{link_tag['href']}",
+            )
+        )
 
     return out
 
 
-def download_apk(variant: Variant):
-    """Download APK from the variant link"""
-    url = variant.link
-    response = session.get(url)
-    if response.status_code != 200:
-        raise FailedToFetch(url)
+def download_apk(variant: Variant) -> None:
+    session = get_session()
 
-    soup = BeautifulSoup(response.content, "html.parser")
-    download_button = soup.find("a", {"class": "downloadButton"})
-    if download_button is None:
-        raise FailedToFindElement("Download button")
+    r = session.get(variant.link)
+    try:
+        r.raise_for_status()
+        soup = BeautifulSoup(r.content, "html.parser")
+    finally:
+        r.close()
 
-    download_page_link = f"https://www.apkmirror.com{download_button['href']}"
-    download_page = session.get(download_page_link)
-    if download_page.status_code != 200:
-        raise FailedToFetch(download_page_link)
+    download_button = soup.find("a", class_="downloadButton")
+    if download_button is None or not download_button.get("href"):
+        raise FailedToFindElement("download button")
 
-    download_soup = BeautifulSoup(download_page.content, "html.parser")
-    direct_link_tag = download_soup.find("a", {"rel": "nofollow"})
-    if direct_link_tag is None:
-        raise FailedToFindElement("download link")
+    download_page_link = f"{BASE_URL}{download_button['href']}"
 
-    direct_link = f"https://www.apkmirror.com{direct_link_tag['href']}"
+    r = session.get(download_page_link)
+    try:
+        r.raise_for_status()
+        download_soup = BeautifulSoup(r.content, "html.parser")
+    finally:
+        r.close()
+
+    direct_link_tag = download_soup.find("a", rel="nofollow")
+    if direct_link_tag is None or not direct_link_tag.get("href"):
+        raise FailedToFindElement("direct download link")
+
+    direct_link = f"{BASE_URL}{direct_link_tag['href']}"
     print(f"Direct link: {direct_link}")
 
     download(direct_link, "big_file.apkm", session=session)
 
 
 def get_variants(version: Version) -> list[Variant]:
-    url = version.link
-    response = session.get(url)
-    if response.status_code != 200:
-        raise FailedToFetch(url)
+    session = get_session()
 
-    soup = BeautifulSoup(response.content, "html.parser")
-    table_div = soup.find("div", {"class": "table"})
+    r = session.get(version.link)
+    try:
+        r.raise_for_status()
+        soup = BeautifulSoup(r.content, "html.parser")
+    finally:
+        r.close()
+
+    table_div = soup.find("div", class_="table")
     if table_div is None:
         raise FailedToFindElement("variants table")
 
-    rows = cast(Tag, table_div).findChildren("div", recursive=False)[1:]
-
+    rows = cast(Tag, table_div).find_all("div", recursive=False)[1:]
     variants: list[Variant] = []
+
     for row in rows:
-        cells = row.findChildren("div", {"class": "table-cell"}, recursive=False)
+        cells = row.find_all("div", class_="table-cell", recursive=False)
         if len(cells) < 2:
             continue
 
-        is_bundle_tag = row.find("span", {"class": "apkm-badge"})
+        architecture = cells[1].get_text(strip=True)
+
+        is_bundle_tag = row.find("span", class_="apkm-badge")
         is_bundle = (
-            is_bundle_tag and is_bundle_tag.string.strip().upper() == "BUNDLE"
+            bool(is_bundle_tag)
+            and is_bundle_tag.get_text(strip=True).upper() == "BUNDLE"
         )
 
-        architecture = cells[1].string.strip()
-        link_element = row.find("a", {"class": "accent_color"})
-        if link_element is None:
+        link_tag = row.find("a", class_="accent_color")
+        if not link_tag or not link_tag.get("href"):
             continue
 
-        link = f"https://www.apkmirror.com{link_element['href']}"
-        variants.append(Variant(is_bundle=is_bundle, link=link, arcithecture=architecture))
+        variants.append(
+            Variant(
+                is_bundle=is_bundle,
+                architecture=architecture,
+                link=f"{BASE_URL}{link_tag['href']}",
+            )
+        )
 
     return variants

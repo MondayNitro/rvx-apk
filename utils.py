@@ -3,36 +3,41 @@ import shutil
 import sys
 import requests
 import subprocess
-from github import get_last_build_version
+import cloudscraper
+from functools import lru_cache
 from constants import HEADERS
 
 
+@lru_cache(maxsize=1)
 def get_browser_session() -> requests.Session:
-    session = requests.Session()
-    session.headers.update(HEADERS)
-    return session
+    scraper = cloudscraper.create_scraper()
+    scraper.headers.update(HEADERS.copy())  # avoid mutating shared constants
+    return scraper
 
 
-def panic(message: str):
+def panic(message: str) -> None:
     print(message, file=sys.stderr)
-    exit(1)
+    sys.exit(1)
 
 
-def download(link: str, out: str, session: requests.Session | None = None):
+def download(link: str, out: str, session: requests.Session | None = None) -> None:
     if os.path.exists(out):
         print(f"{out} already exists, skipping download")
         return
 
     sess = session or get_browser_session()
-
-    with sess.get(link, stream=True) as r:
+    r = sess.get(link, stream=True)
+    try:
         r.raise_for_status()
         with open(out, "wb") as f:
             for chunk in r.iter_content(chunk_size=8192):
-                f.write(chunk)
+                if chunk:
+                    f.write(chunk)
+    finally:
+        r.close()
 
 
-def run_command(command: list[str]):
+def run_command(command: list[str]) -> None:
     cmd = subprocess.run(command, capture_output=True, text=True)
     try:
         cmd.check_returncode()
@@ -40,13 +45,13 @@ def run_command(command: list[str]):
         print("Command failed:")
         print("STDOUT:", cmd.stdout)
         print("STDERR:", cmd.stderr)
-        exit(1)
+        sys.exit(1)
 
 
-def merge_apk(path: str):
+def merge_apk(path: str) -> None:
     subprocess.run(
         ["java", "-jar", "./bins/apkeditor.jar", "m", "-i", path],
-        check=True
+        check=True,
     )
 
 
@@ -57,7 +62,7 @@ def patch_apk(
     includes: list[str] | None = None,
     excludes: list[str] | None = None,
     out: str | None = None,
-):
+) -> None:
     command = [
         "java",
         "-jar",
@@ -91,7 +96,7 @@ def patch_apk(
         shutil.move(cli_output, out)
 
 
-def publish_release(tag: str, files: list[str], message: str):
+def publish_release(tag: str, files: list[str], message: str) -> None:
     key = os.environ.get("GH_TOKEN")
     if not key:
         raise EnvironmentError("GH_TOKEN is not set")

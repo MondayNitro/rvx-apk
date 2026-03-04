@@ -57,7 +57,7 @@ def main():
 
     download_link: Variant | None = None
     for variant in variants:
-        if variant.is_bundle and variant.arcithecture == "universal":
+        if variant.is_bundle and variant.architecture == "universal":
             download_link = variant
             break
 
