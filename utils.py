@@ -4,8 +4,6 @@ import subprocess
 import sys
 
 import requests
-from constants import REPO
-from github import get_last_build_version, get_release_by_tag
 
 _scraper = None
 
@@ -23,51 +21,6 @@ def get_scraper():
 def panic(message: str):
     print(message, file=sys.stderr)
     exit(1)
-
-
-def send_message(message: str, token: str, chat_id: str, thread_id: str):
-    endpoint = f"https://api.telegram.org/bot{token}/sendMessage"
-
-    data = {
-        "parse_mode": "Markdown",
-        "disable_web_page_preview": "true",
-        "text": message,
-        "message_thread_id": thread_id,
-        "chat_id": chat_id,
-    }
-
-    response = requests.post(endpoint, data=data)
-    response.raise_for_status()
-
-
-def report_to_telegram(tag: str | None = None):
-    tg_token = os.environ["TG_TOKEN"]
-    tg_chat_id = os.environ["TG_CHAT_ID"]
-    tg_thread_id = os.environ["TG_THREAD_ID"]
-
-    release = get_release_by_tag(REPO, tag) if tag else get_last_build_version(REPO)
-
-    if release is None and tag:
-        raise RuntimeError(f"Could not fetch release for tag: {tag}")
-
-    if release is None:
-        raise RuntimeError("Could not fetch latest release")
-
-    downloads = [
-        f"[{asset.name}]({asset.browser_download_url})" for asset in release.assets
-    ]
-
-    message = f"""
-[New Update Released !]({release.html_url})
-
-▼ Downloads ▼
-
-{"\n\n".join(downloads)}
-"""
-
-    print(message)
-
-    send_message(message, tg_token, tg_chat_id, tg_thread_id)
 
 
 def download(link, out, headers=None, use_scraper=False):
@@ -94,7 +47,7 @@ def download(link, out, headers=None, use_scraper=False):
 
 
 def run_command(command: list[str]):
-    cmd = subprocess.run(command, capture_output=True, shell=True)
+    cmd = subprocess.run(command, capture_output=True, text=True)
 
     try:
         cmd.check_returncode()
@@ -123,19 +76,10 @@ def patch_apk(
         "-jar",
         cli,
         "patch",
+        "--exclusive",
+        "-f",
         "-p",
         patches,
-        # use j-hc's keystore so we wouldn't need to reinstall
-        "--keystore",
-        "ks.keystore",
-        "--keystore-entry-password",
-        "123456789",
-        "--keystore-password",
-        "123456789",
-        "--signer",
-        "jhc",
-        "--keystore-entry-alias",
-        "jhc",
     ]
 
     if includes is not None:
@@ -152,11 +96,22 @@ def patch_apk(
 
     subprocess.run(command).check_returncode()
 
-    # remove -patched from the apk to match out
+    # Morphe output path
     if out is not None:
-        cli_output = f"{str(apk).removesuffix(".apk")}-patched.apk"
+        apk_name = os.path.splitext(
+            os.path.basename(apk)
+            )[0]
+
+        cli_output = (
+            f"{os.path.splitext(apk)[0]}/"
+            f"{apk_name}-Morphe-file_merged.apk"
+        )
+
+        print(f"Morphe output: {cli_output}")
+
         if os.path.exists(out):
             os.unlink(out)
+            
         shutil.move(cli_output, out)
 
 
