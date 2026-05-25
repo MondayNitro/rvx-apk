@@ -2,17 +2,39 @@ from apkmirror import Version, Variant
 from build_variants import build_apks
 from download_bins import download_apkeditor, download_morphe_cli, download_release_asset
 import github
-from utils import panic, merge_apk, publish_release, report_to_telegram
+from utils import panic, merge_apk, publish_release
 from constants import REPO
 import apkmirror
 import os
 import argparse
+import shutil
+import requests
+import zipfile
 
 
 def get_latest_release(versions: list[Version]) -> Version | None:
     for i in versions:
         if i.version.find("release") >= 0:
             return i
+
+def get_latest_piko_patches_version(
+    url="https://api.github.com/repos/crimera/piko/releases"
+):
+    response = requests.get(url)
+
+    releases_data = response.json()
+
+    for release in releases_data:
+        tag_name = release.get("tag_name")
+        if tag_name:
+            return tag_name
+
+
+def keep_files_recursively(directory: str, files_to_keep: set[str]):
+    for root, _, files in os.walk(directory):
+        for file in files:
+            if file not in files_to_keep:
+                os.remove(os.path.join(root, file))
 
 
 def process(latest_version: Version):
@@ -37,12 +59,27 @@ def process(latest_version: Version):
     if not os.path.exists("big_file.apkm"):
         panic("Failed to download apk")
 
+    with zipfile.ZipFile("big_file.apkm", "r") as zip_ref:
+        zip_ref.extractall("big_file")
+
+    files_to_keep = {
+        "base.apk",
+        "split_config.arm64_v8a.apk",
+        "split_config.en.apk",
+        "split_config.xhdpi.apk",
+        "split_config.xxhdpi.apk",
+    }
+
+    keep_files_recursively("big_file", files_to_keep)
+
     download_apkeditor()
 
     if not os.path.exists("big_file_merged.apk"):
-        merge_apk("big_file.apkm")
+        merge_apk("big_file")
     else:
         print("apkm is already merged")
+
+    shutil.rmtree("big_file")
 
     download_morphe_cli(include_prereleases=True)
 
@@ -59,18 +96,13 @@ Changelogs:
     build_apks(latest_version)
 
     publish_release(
-        latest_version.version,
+        f"{latest_version.version}_{pikoRelease['tag_name']}",
         [
-            f"x-piko-v{latest_version.version}.apk",
-            f"x-piko-material-you-v{latest_version.version}.apk",
             f"twitter-piko-v{latest_version.version}.apk",
-            f"twitter-piko-material-you-v{latest_version.version}.apk",
         ],
         message,
-        latest_version.version
+        f"{latest_version.version}_{pikoRelease['tag_name']}"
     )
-
-    report_to_telegram(tag=latest_version.version)
 
 
 def main():
@@ -97,8 +129,11 @@ def main():
         return
 
     # Begin stuff
-    if last_build_version.tag_name != latest_version.version:
-        print(f"New version found: {latest_version.version}")
+    piko_patches_version = get_latest_piko_patches_version()
+
+    expected_tag = f"{latest_version.version}_{piko_patches_version}"
+    if last_build_version.tag_name != expected_tag:
+        print(f"New version found: {expected_tag}")
     else:
         print("No new version found")
         return
@@ -106,9 +141,28 @@ def main():
     process(latest_version)
 
 
-def manual(version:str):
+def manual(version: str):
     link = f'https://www.apkmirror.com/apk/x-corp/twitter/x-{version.replace(".","-")}-release'
-    latest_version = Version(link=link,version=version)
+    latest_version = Version(link=link, version=version)
+
+    repo_url: str = REPO
+
+    last_build_version: github.GithubRelease | None = github.get_last_build_version(
+        repo_url
+    )
+
+    if last_build_version is None:
+        panic("Failed to fetch the latest build version")
+        return
+
+    piko_patches_version = get_latest_piko_patches_version()
+
+    expected_tag = f"{latest_version.version}_{piko_patches_version}"
+
+    if last_build_version.tag_name == expected_tag:
+        print("No new version found")
+        return
+
     process(latest_version)
 
 
