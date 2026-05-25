@@ -9,48 +9,44 @@ def build_apks(latest_version: Version):
     cli = "bins/morphe-cli.jar"
 
     common_includes = [
-        "Enable app downgrading",
-        "Hide FAB",
-        "Disable chirp font",
-        "Add ability to copy media link",
-        "Hide Banner",
-        "Hide promote button",
-        "Hide Community Notes",
-        "Delete from database",
+        "Hook feature flag",
+        "Custom download folder",
+        "Clear tracking params",
         "Customize Navigation Bar items",
-        "Remove premium upsell",
-        "Control video auto scroll",
+        "Custom sharing domain",
+        "Delete from database",
+        "Disable auto timeline scroll on launch",
+        "Download patch",
+        "Native downloader",
+        "Native reader mode",
+        "Enable PiP mode automatically",
+        "Disable chirp font",
+        "Enable Undo Posts",
+        "Customize explore tabs",
+        "Import/Export login token",
+        "Native translator",
         "Force enable translate",
+        "Customize Inline action Bar items",
+        "Legacy share links",
+        "Customize profile tabs",
+        "Remove premium upsell",
+        "Hide promote button",
+        "Hide FAB",
+        "Customize search tab items",
+        "Selectable Text",
+        "Show poll results",
+        "Customize side bar items",
+        "Customize timeline top bar",
+        "Remove Ads",
+        "Hide recommendation items",
+        "Handle custom twitter links",
+        "Show sensitive media",
+        "Add ability to copy media link",
+        "Bring back twitter",
+        "Hide Banner",
     ]
 
     common_excludes = []
-
-    patch_apk(
-        cli,
-        patches,
-        apk,
-        includes=["Dynamic color"] + common_includes,
-        excludes=common_excludes,
-        out=f"x-piko-material-you-v{latest_version.version}.apk",
-    )
-
-    patch_apk(
-        cli,
-        patches,
-        apk,
-        includes=common_includes,
-        excludes=["Dynamic color"] + common_excludes,
-        out=f"x-piko-v{latest_version.version}.apk",
-    )
-
-    patch_apk(
-        cli,
-        patches,
-        apk,
-        includes=["Bring back twitter", "Dynamic color"] + common_includes,
-        excludes=common_excludes,
-        out=f"twitter-piko-material-you-v{latest_version.version}.apk",
-    )
 
     patch_apk(
         cli,
