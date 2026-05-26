@@ -1,5 +1,5 @@
 {
-  description = "A development environment for twitter-apk with Java";
+  description = "A development environment for rvx-apk with Java";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
