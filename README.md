@@ -1,4 +1,4 @@
-Apk builds of [morphe]([https://github.com/crimera/piko](https://github.com/MorpheApp/morphe-patches)) patches
+Apk builds of [morphe](https://github.com/MorpheApp/morphe-patches) patches
 
 [Latest Build Download](https://github.com/MondayNitro/rvx-apk/releases/latest)
 
