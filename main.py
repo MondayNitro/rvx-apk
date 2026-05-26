@@ -17,7 +17,7 @@ def get_latest_release(versions: list[Version]) -> Version | None:
         if i.version.find("release") >= 0:
             return i
 
-def get_latest_piko_patches_version(
+def get_latest_morphe_patches_version(
     url="https://api.github.com/repos/MorpheApp/morphe-patches/releases"
 ):
     response = requests.get(url)
@@ -79,29 +79,35 @@ def process(latest_version: Version):
     else:
         print("apkm is already merged")
 
+    shutil.make_archive("big_file", "zip", "big_file")
+    os.rename("big_file.zip", "big_file.apks")
     shutil.rmtree("big_file")
 
     download_morphe_cli(include_prereleases=True)
 
     print("Downloading patches")
-    pikoRelease = download_release_asset(
+    morpheRelease = download_release_asset(
         "MorpheApp/morphe-patches", "^patches.*mpp$", "bins", "patches.mpp", include_prereleases=True
     )
 
     message: str = f"""
 Changelogs:
-[morphe-{pikoRelease["tag_name"]}]({pikoRelease["html_url"]})
+[morphe-{morpheRelease["tag_name"]}]({morpheRelease["html_url"]})
 """
 
     build_apks(latest_version)
 
+    os.rename("big_file.apks", f"youtube-bundle-v{latest_version.version}.apks")
+
     publish_release(
-        f"{latest_version.version}_{pikoRelease['tag_name']}",
+        f"{latest_version.version}_{morpheRelease['tag_name']}",
         [
-            f"twitter-piko-v{latest_version.version}.apk",
+            f"yt-morphe-v{latest_version.version}.apk",
+            f"yt-microg-morphe-v{latest_version.version}.apk",
+            f"youtube-bundle-v{latest_version.version}.apks",
         ],
         message,
-        f"{latest_version.version}_{pikoRelease['tag_name']}"
+        f"{latest_version.version}_{morpheRelease['tag_name']}"
     )
 
 
@@ -129,9 +135,9 @@ def main():
         return
 
     # Begin stuff
-    piko_patches_version = get_latest_piko_patches_version()
+    morphe_patches_version = get_latest_morphe_patches_version()
 
-    expected_tag = f"{latest_version.version}_{piko_patches_version}"
+    expected_tag = f"{latest_version.version}_{morphe_patches_version}"
     if last_build_version.tag_name != expected_tag:
         print(f"New version found: {expected_tag}")
     else:
@@ -155,9 +161,9 @@ def manual(version: str):
         panic("Failed to fetch the latest build version")
         return
 
-    piko_patches_version = get_latest_piko_patches_version()
+    morphe_patches_version = get_latest_piko_patches_version()
 
-    expected_tag = f"{latest_version.version}_{piko_patches_version}"
+    expected_tag = f"{latest_version.version}_{morphe_patches_version}"
 
     if last_build_version.tag_name == expected_tag:
         print("No new version found")
@@ -167,7 +173,7 @@ def manual(version: str):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Piko APK')
+    parser = argparse.ArgumentParser(description='Morphe APK')
     # 0 = auto; 1 = manual;
     parser.add_argument('--m', action="store", dest='mode', default=0)
     parser.add_argument('--v', action="store", dest='version', default=0)
