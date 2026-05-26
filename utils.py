@@ -80,6 +80,7 @@ def patch_apk(
         "-f",
         "-p",
         patches,
+        "--unsigned",
     ]
 
     if includes is not None:
