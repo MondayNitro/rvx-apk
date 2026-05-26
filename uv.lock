@@ -117,7 +117,7 @@ wheels = [
 ]
 
 [[package]]
-name = "twitter-apk"
+name = "rvx-apk"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
