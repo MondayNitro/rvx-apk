@@ -18,7 +18,7 @@ def get_latest_release(versions: list[Version]) -> Version | None:
             return i
 
 def get_latest_piko_patches_version(
-    url="https://api.github.com/repos/crimera/piko/releases"
+    url="https://api.github.com/repos/MorpheApp/morphe-patches/releases"
 ):
     response = requests.get(url)
 
@@ -85,12 +85,12 @@ def process(latest_version: Version):
 
     print("Downloading patches")
     pikoRelease = download_release_asset(
-        "crimera/piko", "^patches.*mpp$", "bins", "patches.mpp", include_prereleases=True
+        "MorpheApp/morphe-patches", "^patches.*mpp$", "bins", "patches.mpp", include_prereleases=True
     )
 
     message: str = f"""
 Changelogs:
-[piko-{pikoRelease["tag_name"]}]({pikoRelease["html_url"]})
+[morphe-{pikoRelease["tag_name"]}]({pikoRelease["html_url"]})
 """
 
     build_apks(latest_version)
@@ -107,7 +107,7 @@ Changelogs:
 
 def main():
     # get latest version
-    url: str = "https://www.apkmirror.com/apk/x-corp/twitter/"
+    url: str = "https://www.apkmirror.com/apk/google-inc/youtube/"
     repo_url: str = REPO
 
     versions = apkmirror.get_versions(url)
@@ -142,7 +142,7 @@ def main():
 
 
 def manual(version: str):
-    link = f'https://www.apkmirror.com/apk/x-corp/twitter/x-{version.replace(".","-")}-release'
+    link = f'https://www.apkmirror.com/apk/google-inc/youtube/youtube-{version.replace(".","-")}-release'
     latest_version = Version(link=link, version=version)
 
     repo_url: str = REPO
