@@ -161,7 +161,7 @@ def manual(version: str):
         panic("Failed to fetch the latest build version")
         return
 
-    morphe_patches_version = get_latest_piko_patches_version()
+    morphe_patches_version = get_latest_morphe_patches_version()
 
     expected_tag = f"{latest_version.version}_{morphe_patches_version}"
 
