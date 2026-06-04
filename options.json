@@ -1,0 +1,42 @@
+[
+    {
+        "patches": {
+            "Change package name": {
+                "enabled": false,
+                "options": {
+                    "packageName": "Default",
+                    "updatePermissions": false,
+                    "updateProviders": false,
+                    "updateProvidersStrings": false
+                }
+            },
+            "Custom branding": {
+                "enabled": false,
+                "options": {
+                    "customName": null,
+                    "customIcon": null
+                }
+            },
+            "Change header": {
+                "enabled": false,
+                "options": {
+                    "custom": null
+                }
+            },
+            "Theme": {
+                "enabled": true,
+                "options": {
+                    "darkThemeBackgroundColor": "#FF121212",
+                    "lightThemeBackgroundColor": "@android:color/white"
+                }
+            },
+            "Hide Shorts components": {
+                "enabled": false,
+                "options": {
+                    "hideShortsAppShortcut": false,
+                    "hideShortsWidget": false
+                }
+            }
+        }
+    }
+]

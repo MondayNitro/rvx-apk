@@ -80,6 +80,7 @@ def patch_apk(
         "-f",
         "-p",
         patches,
+        "--options-file=options.json",
         "--unsigned",
     ]
 
