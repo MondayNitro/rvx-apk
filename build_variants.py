@@ -52,6 +52,7 @@ def build_apks(latest_version: Version):
         "Video quality",
         "Playback speed",
         "Copy video URL",
+        "Change form factor",
     ]
 
     common_excludes = []
