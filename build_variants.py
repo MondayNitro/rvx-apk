@@ -51,8 +51,10 @@ def build_apks(latest_version: Version):
         "Force original audio",
         "Video quality",
         "Playback speed",
-        "Copy video URL",
+        "Copy video link",
         "Change form factor",
+        "Bypass link redirects",
+        "Disable fullscreen gestures",
     ]
 
     common_excludes = []
