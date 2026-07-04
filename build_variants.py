@@ -55,6 +55,7 @@ def build_apks(latest_version: Version):
         "Change form factor",
         "Bypass link redirects",
         "Disable fullscreen gestures",
+        "Add to queue",
     ]
 
     common_excludes = []
