@@ -58,7 +58,7 @@ def download_morphe_cli(include_prereleases: bool = False):
     print("Downloading morphe cli")
     download_release_asset(
         "MorpheApp/morphe-cli",
-        r"^morphe-cli.*-all\.jar$",
+        r"^morphe-desktop.*-all\.jar$",
         "bins",
         "morphe-cli.jar",
         include_prereleases=include_prereleases,
