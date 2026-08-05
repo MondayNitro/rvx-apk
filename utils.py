@@ -2,7 +2,7 @@ import os
 import shutil
 import subprocess
 import sys
-
+import glob
 import requests
 
 _scraper = None
@@ -100,15 +100,13 @@ def patch_apk(
 
     # Morphe output path
     if out is not None:
-        apk_name = os.path.splitext(
-            os.path.basename(apk)
-            )[0]
+        apk_dir = os.path.splitext(apk)[0]
+        patched_apk = glob.glob(os.path.join(apk_dir, "*.apk"))
 
-        cli_output = (
-            f"{os.path.splitext(apk)[0]}/"
-            f"{apk_name}-Morphe-file_merged.apk"
-        )
-
+        if not patched_apk:
+            raise FileNotFoundError(f"No APK found in {apk_dir}")
+        
+        cli_output = patched_apk[0]
         print(f"Morphe output: {cli_output}")
 
         if os.path.exists(out):
