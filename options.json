@@ -26,8 +26,8 @@
             "Theme": {
                 "enabled": true,
                 "options": {
-                    "darkThemeBackgroundColor": "#FF121212",
-                    "lightThemeBackgroundColor": "@android:color/white"
+                    "darkThemeColor": "#FF121212",
+                    "lightThemeColor": "in-app"
                 }
             },
             "Hide Shorts components": {
