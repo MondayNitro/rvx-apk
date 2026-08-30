@@ -74,7 +74,7 @@ def build_apks(latest_version: Version):
         cli,
         patches,
         apk,
-        includes=["GmsCore support"] + ["Spoof video streams"] + common_includes,
+        includes=["GmsCore support"] + ["PoToken provider"] + ["Spoof video streams"] + common_includes,
         excludes=common_excludes,
         out=f"yt-microg-morphe-v{latest_version.version}.apk",
     )
