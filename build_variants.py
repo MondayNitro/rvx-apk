@@ -57,6 +57,9 @@ def build_apks(latest_version: Version):
         "Disable fullscreen gestures",
         "Add to queue",
         "Settings menu filter",
+        "Mute button",
+        "Fullscreen video scale",
+        "Wide search bar",
     ]
 
     common_excludes = []
