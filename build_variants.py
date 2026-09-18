@@ -59,7 +59,8 @@ def build_apks(latest_version: Version):
         "Settings menu filter",
         "Mute button",
         "Fullscreen video scale",
-        "Wide search bar",
+        "Channel search",
+        "Disable playlist autoplay",
     ]
 
     common_excludes = []
