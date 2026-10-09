@@ -61,6 +61,8 @@ def build_apks(latest_version: Version):
         "Fullscreen video scale",
         "Channel search",
         "Disable playlist autoplay",
+        "Disable continue watching prompt",
+        "Picture-in-picture button",
     ]
 
     common_excludes = []
