@@ -6,7 +6,7 @@ on:
       version_input:
         description: 'Enter the version'
         required: true
-        default: 20.51.39
+        default: 21.39.528
 
 permissions:
   contents: write
