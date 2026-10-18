@@ -3,10 +3,14 @@ name: Release - manual
 on:
   workflow_dispatch:
     inputs:
-      version_input:
-        description: 'Enter the version'
-        required: true
-        default: 21.39.528
+      youtube_version:
+        description: 'YouTube version (leave empty to skip)'
+        required: false
+        default: '21.41.529'
+      music_version:
+        description: 'YouTube Music version (leave empty to skip)'
+        required: false
+        default: '9.41.52'
 
 permissions:
   contents: write
@@ -33,9 +37,14 @@ jobs:
       - name: Install dependencies
         run: uv sync --frozen
 
-      - name: Try building
+      - name: Build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          YT_VERSION: ${{ inputs.youtube_version }}
+          YTM_VERSION: ${{ inputs.music_version }}
         run: |
           mkdir -p bins
-          uv run main.py --m 1 --v ${{ github.event.inputs.version_input }}
+          args=()
+          if [ -n "$YT_VERSION" ]; then args+=(--youtube "$YT_VERSION"); fi
+          if [ -n "$YTM_VERSION" ]; then args+=(--music "$YTM_VERSION"); fi
+          uv run main.py --m 1 "${args[@]}"
