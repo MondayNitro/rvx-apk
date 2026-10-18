@@ -45,8 +45,3 @@ def get_release_by_tag(repo_url: str, tag: str) -> GithubRelease | None:
     encoded_tag = quote(tag, safe="")
     url = f"https://api.github.com/repos/{repo_url}/releases/tags/{encoded_tag}"
     return _fetch_release(url)
-
-
-def get_last_build_version(repo_url: str) -> GithubRelease | None:
-    url = f"https://api.github.com/repos/{repo_url}/releases/latest"
-    return _fetch_release(url)

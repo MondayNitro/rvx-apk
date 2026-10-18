@@ -1,86 +1,127 @@
 from apkmirror import Version
 from utils import patch_apk
 
+YOUTUBE_INCLUDES = [
+    "Add to queue",
+    "Bypass link redirects",
+    "Bypass URL redirects",
+    "Captions",
+    "Change form factor",
+    "Change start page",
+    "Channel search",
+    "Copy video link",
+    "Disable continue watching prompt",
+    "Disable fullscreen gestures",
+    "Disable haptic feedback",
+    "Disable player popup panels",
+    "Disable playlist autoplay",
+    "Disable rolling number animations",
+    "Disable Shorts resuming on startup",
+    "Disable sign in to TV popup",
+    "Double tap to seek",
+    "Downloads",
+    "Force original audio",
+    "Fullscreen video scale",
+    "Hide ads",
+    "Hide autoplay preview",
+    "Hide end screen cards",
+    "Hide end screen suggested video",
+    "Hide info cards",
+    "Hide layout components",
+    "Hide player flyout menu components",
+    "Hide player overlay buttons",
+    "Hide related videos",
+    "Hide Shorts components",
+    "Hide video action buttons",
+    "Loop video",
+    "Miniplayer",
+    "Mute button",
+    "Navigation bar",
+    "Open links externally",
+    "Open system share sheet",
+    "Override YouTube Music buttons",
+    "Picture-in-picture button",
+    "Play all",
+    "Playback speed",
+    "Reload video",
+    "Remove background playback restrictions",
+    "Sanitize sharing links",
+    "Save to watch later",
+    "Seekbar",
+    "Settings menu filter",
+    "Shorts autoplay",
+    "SponsorBlock",
+    "Swipe controls",
+    "Theme",
+    "Video ads",
+    "Video quality",
+]
 
-def build_apks(latest_version: Version):
-    # patch
+YT_MUSIC_INCLUDES = [
+    "Change miniplayer color",
+    "Change start page",
+    "Crossfade",
+    "Disable dislike redirection",
+    "Downloads",
+    "Enable exclusive audio playback",
+    "Enable forced miniplayer",
+    "Force original audio",
+    "Hide ads",
+    "Hide buttons",
+    "Hide filter bar",
+    "Hide flyout menu components",
+    "Hide layout components",
+    "Hide music action buttons",
+    "Miniplayer previous and next buttons",
+    "Navigation bar",
+    "Play albums songs",
+    "Playback speed",
+    "Remove background playback restrictions",
+    "Sanitize sharing links",
+    "Settings menu filter",
+    "SponsorBlock",
+    "Theme",
+    "Third-party lyrics",
+]
+
+MICROG_EXTRAS = [
+    "GmsCore support",
+    "PoToken provider",
+    "Spoof video streams",
+]
+
+PATCH_TABLE: dict[str, dict[str, list[str]]] = {
+    "youtube": {
+        "base": YOUTUBE_INCLUDES,
+        "microg": MICROG_EXTRAS + YOUTUBE_INCLUDES,
+    },
+    "music": {
+        "base": YT_MUSIC_INCLUDES,
+        "microg": MICROG_EXTRAS + YT_MUSIC_INCLUDES,
+    },
+}
+
+
+def build_apks(latest_version: Version, app):
     apk = "big_file_merged.apk"
     patches = "bins/patches.mpp"
     cli = "bins/morphe-cli.jar"
 
-    common_includes = [
-        "Hide ads",
-        "Video ads",
-        "Disable double tap actions",
-        "Double tap to seek",
-        "Downloads",
-        "Disable haptic feedback",
-        "Loop video",
-        "Play all",
-        "Reload video",
-        "Save to watch later",
-        "Seekbar",
-        "Swipe controls",
-        "Hide video action buttons",
-        "Navigation bar",
-        "Hide player overlay buttons",
-        "Captions",
-        "Hide autoplay preview",
-        "Hide end screen cards",
-        "Hide end screen suggested video",
-        "Hide layout components",
-        "Hide info cards",
-        "Hide player flyout menu components",
-        "Disable player popup panels",
-        "Hide related videos",
-        "Disable rolling number animations",
-        "Hide Shorts components",
-        "Disable sign in to TV popup",
-        "Miniplayer",
-        "Override YouTube Music buttons",
-        "Shorts autoplay",
-        "Disable Shorts resuming on startup",
-        "SponsorBlock",
-        "Change start page",
-        "Theme",
-        "Remove background playback restrictions",
-        "Bypass URL redirects",
-        "Open links externally",
-        "Sanitize sharing links",
-        "Open system share sheet",
-        "Force original audio",
-        "Video quality",
-        "Playback speed",
-        "Copy video link",
-        "Change form factor",
-        "Bypass link redirects",
-        "Disable fullscreen gestures",
-        "Add to queue",
-        "Settings menu filter",
-        "Mute button",
-        "Fullscreen video scale",
-        "Channel search",
-        "Disable playlist autoplay",
-        "Disable continue watching prompt",
-        "Picture-in-picture button",
-    ]
-
-    common_excludes = []
+    table = PATCH_TABLE[app.key]
+    v = latest_version.version
 
     patch_apk(
         cli,
         patches,
         apk,
-        includes=common_includes,
-        excludes=common_excludes,
-        out=f"yt-morphe-v{latest_version.version}.apk",
+        includes=table["base"],
+        out=f"{app.prefix}-morphe-v{v}.apk",
     )
 
     patch_apk(
         cli,
         patches,
         apk,
-        includes=["GmsCore support"] + ["PoToken provider"] + ["Spoof video streams"] + common_includes,
-        excludes=common_excludes,
-        out=f"yt-microg-morphe-v{latest_version.version}.apk",
+        includes=table["microg"],
+        out=f"{app.prefix}-microg-morphe-v{v}.apk",
     )
