@@ -84,7 +84,7 @@ def download_apk(variant: Variant, path: str = "big_file.apkm"):
     )
 
     download_page = get_scraper().get(download_page_link)
-    if response.status_code != 200:
+    if download_page.status_code != 200:
         raise FailedToFetch(download_page_link)
 
     download_page_body = BeautifulSoup(download_page.content, "html.parser")

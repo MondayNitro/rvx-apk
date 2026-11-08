@@ -5,7 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "beautifulsoup4>=4.13.4",
-    "requests>=2.32.3",
-    "cloudscraper>=1.2.71",
+    "beautifulsoup4>=4.15.0",
+    "requests>=2.34.2",
+    "curl_cffi>=0.17.0",
 ]
