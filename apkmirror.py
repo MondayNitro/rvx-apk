@@ -107,14 +107,18 @@ def download_apk(variant: Variant, path: str = "big_file.apkm"):
 
 def get_variants(version: Version) -> list[Variant]:
     url = version.link
-    variants_page = get_scraper().get(url)
-    if variants_page is None:
-        raise FailedToFetch(url)
+    resp = get_scraper().get(url)
+    print(f"GET {url} -> {resp.status_code} (final: {resp.url})")
+    if resp.status_code != 200:
+        raise FailedToFetch(f"{url}: {resp.status_code}")
 
-    variants_page_body = BeautifulSoup(variants_page.content, "html.parser")
+    variants_page_body = BeautifulSoup(resp.content, "html.parser")
 
     variants_table = variants_page_body.find("div", {"class": "table"})
     if variants_table is None:
+        title = variants_page_body.title.string if variants_page_body.title else None
+        print("Page title:", title)
+        print(resp.text[:1500])
         raise FailedToFindElement("variants table")
 
     variants_table_rows = cast(Tag, variants_table).findChildren(
