@@ -120,6 +120,7 @@ def build_apks(latest_version: Version, app):
         cli,
         patches,
         apk,
+        apk_dir=app.name,
         includes=table["base"],
         out=f"{app.prefix}-morphe-v{v}.apk",
     )
@@ -128,6 +129,7 @@ def build_apks(latest_version: Version, app):
         cli,
         patches,
         apk,
+        apk_dir=app.name,
         includes=table["microg"],
         out=f"{app.prefix}-microg-morphe-v{v}.apk",
     )

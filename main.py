@@ -43,7 +43,7 @@ APPS: dict[str, App] = {
     ),
     "music": App(
         key="music",
-        name="YouTube Music",
+        name="YouTube-Music",
         apkmirror_url="https://www.apkmirror.com/apk/google-inc/youtube-music/",
         slug="youtube-music",
         package="com.google.android.apps.youtube.music",

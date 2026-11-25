@@ -67,6 +67,7 @@ def patch_apk(
     cli: str,
     patches: str,
     apk: str,
+    apk_dir: str,
     includes: list[str] | None = None,
     excludes: list[str] | None = None,
     out: str | None = None,
@@ -100,7 +101,6 @@ def patch_apk(
 
     # Morphe output path
     if out is not None:
-        apk_dir = os.path.splitext(apk)[0]
         patched_apk = glob.glob(os.path.join(apk_dir, "*.apk"))
 
         if not patched_apk:

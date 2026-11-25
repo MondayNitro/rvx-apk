@@ -6,7 +6,7 @@ on:
       youtube_version:
         description: 'YouTube version (empty input skips patching)'
         required: false
-        default: '21.41.531'
+        default: '21.44.539'
       music_version:
         description: 'YouTube Music version (empty input skips patching)'
         required: false
